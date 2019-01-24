@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity;
+
+@model List<AppUser>
+@inject UserManager<AppUser> UserManager
+
+@{
+    ViewData["Title"] = "Управление пользователями";
+    Layout = "_Layout";
+}
+
+<h2>Управление пользователями</h2>
+
+<div class="btn-block">@Html.ActionLink("Зарегистрировать", "Edit", "User")</div>
+<table class="table">
+    <tr>
+        <th>Действия</th>
+        <th>Email</th>
+        <th>ФИО</th>
+    </tr>
+        @foreach (var user in Model)
+        {
+            var action = await UserManager.IsInRoleAsync(user, "Admin") ? "Admin" : "User";
+            <tr>
+                <td>@Html.ActionLink("Редактировать", "Edit", "User", new { id = user.Id })  @Html.ActionLink("Удалить", "Remove", "User", new { id = user.Id }) @Html.ActionLink(action, "ToggleAdmin", "User", new { id = user.Id }) </td>
+                <td>@user.Email</td>
+                <td>@string.Format("{0} {1} {2}", user.Surname, user.FirstName, user.LastName)</td>
+            </tr>
+        } 
+</table>
+
