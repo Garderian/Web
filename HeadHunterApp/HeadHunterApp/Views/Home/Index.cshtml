@@ -1,0 +1,31 @@
+﻿@model HeadHunterApp.Models.VacanciesModel
+
+
+<h1>Лабораторная работа №5</h1>
+<h3>@String.Format("Профессии с зарплатой >= " + Model.MoreSalary + " рублей")</h3>
+    @foreach (string vacancy in Model.VacanciesBiggerOrEvenThanNumber)
+    {
+        <p>@vacancy</p>
+    }
+<h3>@String.Format("Ключевые навыки из вакансий с зарплатой >= " + Model.MoreSalary + " рублей")</h3>
+    @foreach (string keySkill in Model.SkillsBiggerOrEvenThanNumber)
+     {
+        <p>@keySkill</p>
+     }
+<h3>@String.Format("Профессии с зарплатой < " + Model.LowerSalary + " рублей")</h3>
+     @foreach (string vacancy in Model.VacanciesLowerOrEvenThanNumber)
+      {
+        <p>@vacancy</p>
+      }
+<h3>@String.Format("Ключевые навыки из вакансий с зарплатой < " + Model.LowerSalary + " рублей")</h3>
+      @if (Model.SkillsLowerOrEvenThanNumber.Count > 0)
+      {
+          @foreach (string keySkill in Model.SkillsLowerOrEvenThanNumber)
+           {
+             <p>@keySkill</p>
+           }
+      }
+      else
+      {
+          <p>Ключевые навыки отсуствуют</p>
+      }
